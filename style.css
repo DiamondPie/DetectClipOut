@@ -9,6 +9,23 @@ body {
     overflow: hidden;
 }
 
+@media (max-width: 600px) {
+    body {
+        font-size: 14px !important; /* 为小屏设备调整字体大小 */ 
+    }
+    body h1 {
+        font-size: 24px !important;
+        letter-spacing: 1px !important;
+    }
+    .container .line {
+        margin: 20px 0 !important;
+    }
+    .footer-text {
+        font-size: 12px !important;
+        letter-spacing: normal !important;
+    }
+}
+
 /* 设置第一个 div 的样式 */
 .background-grid {
     pointer-events: none; /* 禁用鼠标事件 */
@@ -62,8 +79,10 @@ body {
 
 /* 定义按钮的样式 */
 .reset {
-    width: 400px;
-    height: 70px;
+    width: 40vw;
+    height: 6vw;
+    min-width: 280px;
+    min-height: 40px;
     margin-top: 50px ;
     border: 2px solid white; /* 白色圆角边框 */
     border-radius: 15px; /* 圆角效果 */
