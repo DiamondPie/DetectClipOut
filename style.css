@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@400&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000212;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* 设置第一个 div 的样式 */
+.background-grid {
+    pointer-events: none; /* 禁用鼠标事件 */
+    position: fixed; /* 固定定位 */
+    inset: 0; /* 将元素的所有边设置为 0，相当于 top: 0; right: 0; bottom: 0; left: 0; */
+    user-select: none; /* 禁用文本选择 */
+    background-image: url('./grid.svg'); /* 背景图 */
+    background-position: top; /* 背景位置 */
+    background-repeat: repeat; /* 背景重复 */
+}
+
+/* 设置第二个 span 的样式 */
+.background-gradient {
+    pointer-events: none; /* 禁用鼠标事件 */
+    position: fixed; /* 固定定位 */
+    top: 0; /* 将元素定位到页面顶部 */
+    display: block; /* 显示为块级元素 */
+    height: 800px; /* 设置高度 */
+    width: 100%; /* 设置宽度为 100% */
+    user-select: none; /* 禁用文本选择 */
+    background: radial-gradient(103.72% 46.58% at 50% 0%, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0) 100%); /* 深色模式下的径向渐变 */
+}
+
+/* 定义 container 类，使其中的所有元素居中 */
+.container {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh; /* 使容器充满视口高度 */
+    border: 2px solid #000; /* 给容器加个边框，方便观察布局 */
+    flex-direction: column; /* 使子元素垂直排列 */
+    font-family: Arial, sans-serif;
+}
+
+/* 为容器内的元素定义样式 */
+.container h1 {
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+.container p {
+    margin: 5px 0;
+}
+
+.line {
+    margin: 40px 0;
+    width: 200px;
+    height: 0.5px;
+    background-color: white;
+}
+
+/* 定义按钮的样式 */
+.reset {
+    width: 400px;
+    height: 70px;
+    margin-top: 50px ;
+    border: 2px solid white; /* 白色圆角边框 */
+    border-radius: 15px; /* 圆角效果 */
+    background-color: transparent; /* 透明背景 */
+    color: white; /* 白色文字 */
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px; /* 使文字在按钮中垂直居中 */
+    cursor: pointer;
+    transition: all 0.3s ease; /* 鼠标悬停时的平滑过渡 */
+}
+
+.reset.detected {
+    border: 2px solid rgb(255, 107, 107);
+    color: rgb(255, 107, 107);
+}
+
+/* 鼠标悬停效果 */
+.reset:hover {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.1); /* 轻微的白色背景 */
+}
+.reset.detected:hover {
+    background-color: rgba(255, 38, 38, 0.1);
+}
+
+.text {
+    font-family: 'SUSE', sans-serif;
+}
+
+/* 底部文字样式 */
+.footer-text {
+    letter-spacing: 2px;
+    position: fixed; /* 固定在视口底部 */
+    bottom: 0; /* 距离底部为 0 */
+    width: 100%; /* 占据整个宽度 */
+    text-align: center; /* 文本居中 */
+    padding: 10px;
+    font-size: 14px;
+    color: #999; /* 文本颜色 */
+}
+
+.footer-text a {
+    color: #999; /* 文本颜色 */
+}

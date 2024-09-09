@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Window Blur Alert</title>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <span class="background-gradient"></span>
+    <div class="container">
+        <h1>您的翻译器能否通过<b>切屏检测</b>？</h1>
+        <div class="line"></div>
+        <p>众所周知，NZQA会检测您在考试过程中是否离开考试页面</p>
+        <p>基于此，我制作了一个模拟检测的网站</p>
+        <p>它可以判断在什么情况下您会被检测出切屏</p>
+        <p>与NZQA的页面不同的是，您在此处测试不会影响到您的成绩 :D</p>
+        <div style="height:30px"></div>
+        <p>这里提供了一些句子以供您测试您的翻译器插件</p>
+        <p class="text">Hello, my name is <b>Tom</b>.</p>
+        <p class="text">This is an apple. I like apples. Apples are good for our health.</p>
+        <button class="reset" id="status" onclick="reset()">当前未检测到切屏</button>
+    </div>
+
+    <div class="footer-text">
+        Made By DiamondPie | 已在 <a href="">Github</a> 开源 | <a href="https://diamondpie.is-best.net">返回我的个人主页</a> 
+    </div>
+    
+    <script color="255,255,255", opaticy="0.7", zIndex="-1", count="200", src="dynamic-line.js"></script>
+</body>
+<script>
+    const status = document.getElementById('status');
+    var lostFocus = false;
+
+    function detectedClipOut() {
+        if (lostFocus) return;
+        status.classList.add('detected');
+        status.innerText = '检测到切屏，点击此按钮以重置';
+        lostFocus = true;
+    }
+
+    function reset() {
+        status.classList.remove('detected');
+        status.innerText = '当前未检测到切屏';
+        lostFocus = false;
+    }
+
+    // 监听窗口失去焦点事件
+    document.onblur = window.onblur = detectedClipOut;
+    // document.onmouseleave = window.onmouseleave = detectedClipOut;
+    window.addEventListener('blur', detectedClipOut);
+    window.addEventListener('visibilitychange', detectedClipOut)
+</script>
+</html>
