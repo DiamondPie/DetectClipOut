@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #000212;
+    background-color: #1f0010;
     color: #ffffff;
     overflow: hidden;
 }
@@ -32,7 +32,7 @@ body {
     position: fixed; /* 固定定位 */
     inset: 0; /* 将元素的所有边设置为 0，相当于 top: 0; right: 0; bottom: 0; left: 0; */
     user-select: none; /* 禁用文本选择 */
-    background-image: url('./grid.svg'); /* 背景图 */
+    background-image: url('../assets/grid.svg'); /* 背景图 */
     background-position: top; /* 背景位置 */
     background-repeat: repeat; /* 背景重复 */
 }
@@ -69,6 +69,10 @@ body {
 
 .container p {
     margin: 5px 0;
+}
+
+.container a {
+    color: #fff;
 }
 
 .line {
