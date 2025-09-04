@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Window Blur Alert</title>
+</head>
+<body>
+    <div class="background-grid"></div>
+    <span class="background-gradient"></span>
+    <div class="container">
+        <h1>您的翻译器能否通过<b style="color: #ff6969">严格检测</b>？</h1>
+        <div class="line"></div>
+        <p>此页面<b>不是</b>仿NZQA页面的切屏检测</p>
+        <p>但其几乎可以检测<b></b>一切基于浏览器插件的翻译器</p>
+        <p>如果您可以绕过此检测，说明您的翻译器已经超神了！</p>
+        <p>与简单检测不同，您只能通过<b>刷新页面</b>以再次尝试！</p>
+        <div style="height:30px"></div>
+        <p>这里提供了一些句子以供您测试您的翻译器插件</p>
+        <p class="text">This is an <b>apple</b>. I like apples. Apples are good for our <b>health</b>.</p>
+        <p><a href="/focus/easy">切换回简单模式</a></p>
+        <button class="reset" id="status" onclick="reset()">未检测到任意异常</button>
+    </div>
+
+    <div class="footer-text">
+        Made By DiamondPie | 已在 <a href="https://github.com/DiamondPie/DetectClipOut">Github</a> 开源
+    </div>
+    
+    <script color="255,255,255", opaticy="0.7", zIndex="-1", count="99", src="dynamic-line.js"></script>
+</body>
+<script>
+    const existingElements = new Set();
+    const status = document.getElementById('status');
+    var lostFocus = false;
+
+    function detectedClipOut(reason) {
+        if (lostFocus) return;
+        status.classList.add('detected');
+        status.innerText = reason;
+        lostFocus = true;
+    }
+
+    function reset() {
+        if (lostFocus) window.location.reload();
+    }
+
+    // 监听窗口失去焦点事件
+    document.onblur = window.onblur = () => {
+        detectedClipOut('检测到切屏：页面失去焦点');
+    };
+    window.addEventListener('blur', () => {
+        detectedClipOut('检测到切屏：blur监听器被触发');
+    });
+    window.addEventListener('visibilitychange', () => {
+        detectedClipOut('检测到切屏：visibilitychange监听器被触发');
+    })
+
+    // 在页面加载时记录所有现有的元素
+    document.querySelectorAll('*').forEach(el => {
+        existingElements.add(el);
+    });
+
+    // 选择你要观察的节点
+    const targetNode = document.documentElement;
+
+    // 设置观察选项
+    const config = { 
+        childList: true, // 监听子节点的增删
+        subtree: true    // 监听整个子树（包括所有的子节点）
+    };
+
+    // 创建回调函数，当 DOM 变化时会调用该函数
+    const callback = function(mutationsList, observer) {
+        for(const mutation of mutationsList) {
+            // 遍历所有新增节点
+            mutation.addedNodes.forEach(node => {
+                // 检查节点是否是元素节点（忽略文本节点等）
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    // 如果节点是页面上新插入的元素（不在现有元素集合中）
+                    if (!existingElements.has(node)) {
+                        console.log('qwq')
+                        detectedClipOut('检测到非法元素注入，这可能意味着您添加了插件\n标签名：' + node.nodeName + ' | ID: ' + node.id);
+                    }
+                }
+            });
+        }
+    };
+
+    // 创建一个新的 MutationObserver 实例并传入回调函数
+    const observer = new MutationObserver(callback);
+
+    // 开始观察指定的节点，并应用配置的选项
+    observer.observe(targetNode, config);
+
+
+
+</script>
+</html>
